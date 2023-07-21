@@ -1,17 +1,12 @@
 package com.emannuel.organizecafe.organizecafe.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.emannuel.organizecafe.organizecafe.model.dto.CollaboratorDTO;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,21 +15,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Coffee")
+@Table(name = "coffee")
 public class Coffee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private CollaboratorDTO collaborator;
-
-    @Column()
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Collaborator collaborator;
     private String coffeeItem;
-
-    private LocalDate coffeeDate = LocalDate.now();
-
+    @Column(name = "scheduled_date")
+    private LocalDate coffeeDate;
     private boolean realized;
+
     
 
 
