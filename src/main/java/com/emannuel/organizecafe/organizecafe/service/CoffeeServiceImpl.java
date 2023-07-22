@@ -46,6 +46,9 @@ public class CoffeeServiceImpl implements CoffeeService {
     public List<Coffee> getById(Long id) {
         return Collections.singletonList(coffeeRepository.findById(id).get());
     }
+    public Coffee getbyRealized(Boolean boo) {
+        return (Coffee) coffeeRepository.findByRealized(boo);
+    }
 
     @Override
     public List<Coffee> update(CoffeeUpdateDTO form, Long id) {
@@ -53,6 +56,7 @@ public class CoffeeServiceImpl implements CoffeeService {
         coffee.setCoffeeDate(form.coffeeDate());
         coffee.setCoffeeItem(form.coffeeItem());
         coffee.setRealized(form.realized());
+        coffeeRepository.save(coffee);
         return list();
     }
 

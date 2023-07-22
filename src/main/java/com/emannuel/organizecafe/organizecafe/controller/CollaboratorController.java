@@ -4,7 +4,9 @@ import com.emannuel.organizecafe.organizecafe.model.Collaborator;
 import com.emannuel.organizecafe.organizecafe.model.dto.CollaboratorDTO;
 import com.emannuel.organizecafe.organizecafe.model.dto.CollaboratorUpdateDTO;
 import com.emannuel.organizecafe.organizecafe.service.serviceint.CollaboratorService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class CollaboratorController {
     }
 
     @PostMapping("/create")
-    ResponseEntity<List<Collaborator>> create(@RequestBody CollaboratorDTO form) {
+    ResponseEntity<List<Collaborator>> create(@RequestBody @Validated CollaboratorDTO form) {
         return ResponseEntity.ok().body(collaboratorService.create(form));
     }
 
@@ -34,7 +36,7 @@ public class CollaboratorController {
         return ResponseEntity.ok(collaboratorService.update(id, form));
     }
     @DeleteMapping("/delete/{id}")
-    ResponseEntity<?> delete(@PathVariable Long id) {
+    ResponseEntity<?> delete(@PathVariable @Validated Long id) {
         return ResponseEntity.ok(collaboratorService.delete(id));
     }
 }

@@ -5,8 +5,10 @@ import com.emannuel.organizecafe.organizecafe.model.dto.CoffeeDTO;
 import com.emannuel.organizecafe.organizecafe.model.dto.CoffeeUpdateDTO;
 import com.emannuel.organizecafe.organizecafe.service.serviceint.CoffeeService;
 import com.emannuel.organizecafe.organizecafe.service.serviceint.CollaboratorService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class CoffeeController {
 
     }
     @PostMapping("/create")
-    ResponseEntity<?> create(@RequestBody CoffeeDTO form) {
+    ResponseEntity<?> create(@RequestBody @Validated CoffeeDTO form) {
 
         return ResponseEntity.ok().body(coffeeService.create(form));
     }

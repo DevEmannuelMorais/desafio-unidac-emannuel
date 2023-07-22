@@ -3,6 +3,7 @@ package com.emannuel.organizecafe.organizecafe.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
@@ -33,7 +34,7 @@ public class Collaborator {
 
 
 
-    @OneToMany(mappedBy = "collaborator",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "collaborator",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Coffee> coffee = new ArrayList<>();
 
