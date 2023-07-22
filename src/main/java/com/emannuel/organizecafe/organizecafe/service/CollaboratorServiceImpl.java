@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import com.emannuel.organizecafe.organizecafe.model.dto.CollaboratorUpdateDTO;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -41,13 +42,11 @@ public class CollaboratorServiceImpl implements CollaboratorService{
     }
 
     @Override
-    public List<Collaborator> update(Long id, CollaboratorDTO form) {
+    public List<Collaborator> update(Long id, CollaboratorUpdateDTO form) {
         Collaborator com = collaboratorRepository.findById(id).get();
         com.setCpf(form.cpf());
         com.setName(form.name());
-        collaboratorRepository.save(com);
-
-        return getAll();
+        return Collections.singletonList(collaboratorRepository.save(com));
     }
 
     @Override

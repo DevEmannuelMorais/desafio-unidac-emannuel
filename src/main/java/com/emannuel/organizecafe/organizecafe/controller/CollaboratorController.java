@@ -2,6 +2,7 @@ package com.emannuel.organizecafe.organizecafe.controller;
 
 import com.emannuel.organizecafe.organizecafe.model.Collaborator;
 import com.emannuel.organizecafe.organizecafe.model.dto.CollaboratorDTO;
+import com.emannuel.organizecafe.organizecafe.model.dto.CollaboratorUpdateDTO;
 import com.emannuel.organizecafe.organizecafe.service.serviceint.CollaboratorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,11 @@ public class CollaboratorController {
     }
 
     @PutMapping("/update/{id}")
-    ResponseEntity<?> update(@PathVariable Long id,@RequestBody CollaboratorDTO form) {
+    ResponseEntity<?> update(@PathVariable Long id,@RequestBody CollaboratorUpdateDTO form) {
         return ResponseEntity.ok(collaboratorService.update(id, form));
+    }
+    @DeleteMapping("/delete/{id}")
+    ResponseEntity<?> delete(@PathVariable Long id) {
+        return ResponseEntity.ok(collaboratorService.delete(id));
     }
 }
