@@ -27,7 +27,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                         url = "http://localhost:8080"
                 ),
                 @Server(description = "Prod ENV",
-                        url = "https://github.com/DevEmannuelMorais/academia-digital")
+                        url =  "https://desafio-unidac-emannuel-production.up.railway.app")
         }
 )
 public class OpenApiConfig {
