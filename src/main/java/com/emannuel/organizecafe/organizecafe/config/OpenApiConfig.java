@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 version = "1.0",
                 license = @License(
                         name = "README Coffee",
-                        url = "https://www.jusbrasil.com.br/artigos/o-direito-do-consumidor-e-as-academias-de-ginastica/183577567"
+                        url = "https://github.com/DevEmannuelMorais/desafio-unidac-emannuel/blob/main/README.md"
                 ),termsOfService = "Termos de Seviço"
         ),
         servers = {
