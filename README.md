@@ -27,6 +27,14 @@ API para gerenciar comidas levadas para um café da manhã (CRUD) que faz parte 
 - Tratamento de respostas de erro
 - Geração automática do Swagger com a OpenAPI 3
 
+## Testando a aplicação na nuvem
+
+- o deploy da aplicação foi feito no Railway
+
+### Clique no link para testar a documentação da api no OpenAPI Swagger
+[SpringDoc OpenAPI 3](https://springdoc.org/v2/#spring-webflux-support)
+
+
 ## Como Executar
 
 - Clonar repositório git
