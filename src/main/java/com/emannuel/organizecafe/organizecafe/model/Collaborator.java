@@ -1,12 +1,12 @@
 package com.emannuel.organizecafe.organizecafe.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+
 import lombok.*;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +41,12 @@ public class Collaborator {
 
 
     public Collaborator(String cpf, String name) {
+        this.cpf = cpf;
+        this.name = name;
+    }
+
+    public Collaborator(Long id, String cpf, String name) {
+        this.id = id;
         this.cpf = cpf;
         this.name = name;
     }

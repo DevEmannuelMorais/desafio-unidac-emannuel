@@ -16,5 +16,6 @@ public interface CoffeeService {
     List<Coffee> update(CoffeeUpdateDTO form, Long id);
 
     List<Coffee> delete(Long id);
+    List<Coffee> findByRealized(Boolean read);
     
 }

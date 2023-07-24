@@ -1,5 +1,6 @@
 package com.emannuel.organizecafe.organizecafe.service;
 
+import com.emannuel.organizecafe.organizecafe.exception.BadRequestException;
 import com.emannuel.organizecafe.organizecafe.model.Coffee;
 import com.emannuel.organizecafe.organizecafe.model.dto.CoffeeDTO;
 import com.emannuel.organizecafe.organizecafe.model.dto.CoffeeUpdateDTO;
@@ -9,6 +10,7 @@ import com.emannuel.organizecafe.organizecafe.service.serviceint.CoffeeService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,7 +38,8 @@ public class CoffeeServiceImpl implements CoffeeService {
     }
     @Override
     public List<Coffee> list(){
-        Sort sort = Sort.by("id").descending().and(
+        Sort sort = Sort.by("id").descending()
+                .and(
                 Sort.by("collaborator_id").ascending()
         );
         return coffeeRepository.findAll(sort);
@@ -53,17 +56,28 @@ public class CoffeeServiceImpl implements CoffeeService {
     @Override
     public List<Coffee> update(CoffeeUpdateDTO form, Long id) {
         Coffee coffee = coffeeRepository.findById(id).get();
-        coffee.setCoffeeDate(form.coffeeDate());
-        coffee.setCoffeeItem(form.coffeeItem());
-        coffee.setRealized(form.realized());
-        coffeeRepository.save(coffee);
+        coffeeRepository.findById(id).ifPresentOrElse((existingCoffee) -> {
+            coffee.setCoffeeDate(form.coffeeDate());
+            coffee.setCoffeeItem(form.coffeeItem());
+            coffee.setRealized(form.realized());
+            coffeeRepository.save(coffee);
+        }, () -> {
+            throw new BadRequestException("Coffe %d não exite! ".formatted(id));
+        });
         return list();
     }
 
     @Override
     public List<Coffee> delete(Long id) {
-        coffeeRepository.deleteById(id);
+        coffeeRepository.findById(id).ifPresentOrElse((existingCoffee) -> coffeeRepository.deleteById(existingCoffee.getId()), () -> {
+            throw new BadRequestException("Coffe %d não exite! ".formatted(id));
+        });
+
         return list();
+    }
+
+    public List<Coffee> findByRealized(Boolean read) {
+        return coffeeRepository.findByRealized(read);
     }
 
 

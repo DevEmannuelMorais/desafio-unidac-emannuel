@@ -1,22 +1,9 @@
 package com.emannuel.organizecafe.organizecafe.model;
-
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.emannuel.organizecafe.organizecafe.model.dto.CollaboratorDTO;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,7 +26,10 @@ public class Coffee  {
 
     private boolean realized;
 
-    
-
-
+    public Coffee(Collaborator collaborator, String coffeeItem, LocalDate coffeeDate, boolean realized) {
+        this.collaborator = collaborator;
+        this.coffeeItem = coffeeItem;
+        this.coffeeDate = coffeeDate;
+        this.realized = realized;
+    }
 }

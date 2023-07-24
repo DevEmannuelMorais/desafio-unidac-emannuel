@@ -1,10 +1,11 @@
 package com.emannuel.organizecafe.organizecafe.service;
 
-import java.util.Collection;
+
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
+
+import com.emannuel.organizecafe.organizecafe.exception.BadRequestException;
 import com.emannuel.organizecafe.organizecafe.model.dto.CollaboratorUpdateDTO;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -44,14 +45,23 @@ public class CollaboratorServiceImpl implements CollaboratorService{
     @Override
     public List<Collaborator> update(Long id, CollaboratorUpdateDTO form) {
         Collaborator com = collaboratorRepository.findById(id).get();
-        com.setCpf(form.cpf());
-        com.setName(form.name());
+
+        collaboratorRepository.findById(id).ifPresentOrElse((collaborator) -> {
+            com.setCpf(form.cpf());
+            com.setName(form.name());
+        }, () -> {
+            throw new BadRequestException("Collaborator %d não existe!".formatted(id));
+        });
+
         return Collections.singletonList(collaboratorRepository.save(com));
     }
 
     @Override
     public List<Collaborator> delete(Long id) {
-        collaboratorRepository.deleteById(id);
+        collaboratorRepository.findById(id).ifPresentOrElse((collaborator) -> collaboratorRepository.deleteById(collaborator.getId()),
+                () -> {
+            throw new BadRequestException("Collaborator de id %d não exite!".formatted(id));
+                });
        return getAll();
     }
 

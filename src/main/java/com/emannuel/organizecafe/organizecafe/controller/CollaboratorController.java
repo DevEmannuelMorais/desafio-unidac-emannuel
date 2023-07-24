@@ -4,7 +4,6 @@ import com.emannuel.organizecafe.organizecafe.model.Collaborator;
 import com.emannuel.organizecafe.organizecafe.model.dto.CollaboratorDTO;
 import com.emannuel.organizecafe.organizecafe.model.dto.CollaboratorUpdateDTO;
 import com.emannuel.organizecafe.organizecafe.service.serviceint.CollaboratorService;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/Collaborator")
 public class CollaboratorController {
 
@@ -27,16 +27,20 @@ public class CollaboratorController {
     }
 
     @GetMapping("/list")
-    ResponseEntity<List<Collaborator>> list() {
+    ResponseEntity<?> list() {
         return ResponseEntity.ok(collaboratorService.getAll());
     }
 
     @PutMapping("/update/{id}")
-    ResponseEntity<?> update(@PathVariable Long id,@RequestBody CollaboratorUpdateDTO form) {
+    ResponseEntity<?> update(@PathVariable Long id,@RequestBody @Validated CollaboratorUpdateDTO form) {
         return ResponseEntity.ok(collaboratorService.update(id, form));
     }
     @DeleteMapping("/delete/{id}")
     ResponseEntity<?> delete(@PathVariable @Validated Long id) {
         return ResponseEntity.ok(collaboratorService.delete(id));
+    }
+    @GetMapping("/list/{id}")
+    ResponseEntity<?> listById(@PathVariable Long id) {
+        return ResponseEntity.ok(collaboratorService.getById(id));
     }
 }

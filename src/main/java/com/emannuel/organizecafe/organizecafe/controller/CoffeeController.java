@@ -1,18 +1,14 @@
 package com.emannuel.organizecafe.organizecafe.controller;
 
-import com.emannuel.organizecafe.organizecafe.model.Coffee;
 import com.emannuel.organizecafe.organizecafe.model.dto.CoffeeDTO;
 import com.emannuel.organizecafe.organizecafe.model.dto.CoffeeUpdateDTO;
 import com.emannuel.organizecafe.organizecafe.service.serviceint.CoffeeService;
-import com.emannuel.organizecafe.organizecafe.service.serviceint.CollaboratorService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/coffee")
 public class CoffeeController {
 
@@ -41,5 +37,11 @@ public class CoffeeController {
     @DeleteMapping("/delete/{id}")
     ResponseEntity<?> delete(@PathVariable Long id) {
         return ResponseEntity.ok(coffeeService.delete(id));
+    }
+
+    @GetMapping("/realized/{realized}")
+    ResponseEntity<?> findByRealized(@PathVariable Boolean realized) {
+        return ResponseEntity.ok(coffeeService.findByRealized(realized));
+
     }
 }
