@@ -31,8 +31,11 @@ API para gerenciar comidas levadas para um café da manhã (CRUD) que faz parte 
 
 - o deploy da aplicação foi feito no Railway
 
+
 ### Clique no link para testar a documentação da api no OpenAPI Swagger
 [SpringDoc OpenAPI 3](https://desafio-unidac-emannuel-production.up.railway.app/swagger-ui/index.html#/)
+
+https://desafio-unidac-emannuel-production.up.railway.app/swagger-ui/index.html#/
 
 
 ## Como Executar
