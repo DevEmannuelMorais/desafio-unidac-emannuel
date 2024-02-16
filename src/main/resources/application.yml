@@ -1,18 +1,14 @@
-spring:
-  jackson:
-    serialization:
-      fail-on-empty-beans: false
+  server:
+    port: 8080
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/cafe?useTimezone=true&serverTimezone=UTC&useLegacyDate
-    username: root
-    password: 134546
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate.format_sql: true
-    database: mysql
+  spring:
+    datasource:
+      url: jdbc:postgresql://localhost:5432/postgres
+      username: postgres
+      password: 134546
+      driver-class-name: org.postgresql.Driver
+    jpa:
+      hibernate:
+        ddl-auto: update
+
 
